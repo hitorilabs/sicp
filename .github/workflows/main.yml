@@ -1,11 +1,17 @@
-steps:
-- uses: actions/checkout@master
-- uses: Bogdanp/setup-racket@v1.10
-  with:
-    architecture: 'arm64'
-    distribution: 'minimal'
-    variant: 'CS'
-    version: '8.9'
-    dest: '/opt/racket'
-    sudo: never
-    local_catalogs: $GITHUB_WORKSPACE
+on:
+  - push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: Bogdanp/setup-racket@v1.10
+        with:
+          architecture: 'x86'
+          distribution: 'minimal'
+          version: '8.9'
+          packages: 'rackcheck'
+      - name: Run Tests
+        run: raco test main.rkt
+
