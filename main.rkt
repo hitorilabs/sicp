@@ -5,5 +5,4 @@
 (define (f x) x)
 
 (check-equal? (f 3) 3)
-(check-equal? (f 3) 4)
 
