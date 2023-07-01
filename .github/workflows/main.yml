@@ -1,0 +1,11 @@
+steps:
+- uses: actions/checkout@master
+- uses: Bogdanp/setup-racket@v1.10
+  with:
+    architecture: 'arm64'
+    distribution: 'minimal'
+    variant: 'CS'
+    version: '8.9'
+    dest: '/opt/racket'
+    sudo: never
+    local_catalogs: $GITHUB_WORKSPACE
