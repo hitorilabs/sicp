@@ -1,0 +1,24 @@
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Cache Racket dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache/racket
+            ~/.local/share/racket
+          key: ${{ runner.os }}-racket-8.9
+      - uses: Bogdanp/setup-racket@v1.10
+        with:
+          architecture: 'x64'
+          distribution: 'minimal'
+          version: '8.9'
+          variant: 'CS'
+      - name: Install Dependencies
+        run: raco pkg install --auto --skip-installed sicp
+      - name: Run Tests
+        run: raco test .
+
